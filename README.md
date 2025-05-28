@@ -23,7 +23,7 @@ L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progre
 
 ---
 
-## 🔌 3. Componenti Hardware
+##  3. Componenti Hardware
 
 | Componente         | Descrizione                         |
 |--------------------|-------------------------------------|
