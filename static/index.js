@@ -25,12 +25,21 @@ let port;
         ArrowDown: 'I',
         ArrowLeft: 'S',
         ArrowRight: 'D',
-        ' ': 'P'
+        ' ': 'P',
+         w: 'A',
+        s: 'I',
+        a: 'S',
+        d: 'D',
+  
       };
       if (map[e.key]) sendCommand(map[e.key]);
     });
 
-    
+    document.addEventListener('keydown', (e) => {
+  const key = e.key.toLowerCase(); // converte in minuscolo
+  if (map[key]) sendCommand(map[key]);
+  });
+
 
     function inviaComando(comando) {
       fetch("/invia_comando", {
