@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RC - Bandito</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+</head>
+<body>
+  <h1>RC - Bandito</h1>
+  <button class="btn connect-btn" onclick="connectSerial()">🔌 Connetti Arduino</button>
+
+  <div class="controller">
+    <div></div>
+    <button class="btn" onclick="inviaComando('A')">▲</button>
+    <div></div>
+
+    <button class="btn" onclick="inviaComando('S')">◀</button>
+    <button class="btn" onclick="inviaComando('P')">⏹</button>
+    <button class="btn" onclick="inviaComando('D')">▶</button>
+
+    <div></div>
+    <button class="btn" onclick="inviaComando('I')">▼</button>
+    <div></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" onclick="inviaComando('B')">💡 Luci Ant.</button>
+    <button class="btn" onclick="inviaComando('E')">🔙 Luci Post.</button>
+    <button class="btn" onclick="inviaComando('F')">⚠️ Emergenza</button>
+    <button class="btn" onclick="inviaComando('C')">🔊 Clacson</button>
+  </div>
+
+  <div class="slider-group">
+    <label for="speedSlider">🚀 Velocità: <span id="speedValue">200</span></label>
+    <input type="range" id="speedSlider" min="0" max="255" value="200" onchange="updateSpeed(this.value)">
+  </div>
+
+  <div class="regole" onclick="cambia()">
+    <ul>
+      <li>Freccia destra: vai a destra</li>
+      <li>Freccia su: vai avanti</li>
+      <li>Freccia indietro: vai indietro</li>
+      <li>Freccia sinistra: vai  a sinistra</li>
+      <li>Spazio: fermati</li>
+      <li></li>
+    </ul>
+  </div>
+  
+
+</body>
+</html>
