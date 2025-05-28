@@ -1,11 +1,11 @@
-# 🚗 Progetto: Macchinina Telecomandata con Arduino + PWA
+#  Progetto: Macchinina Telecomandata con Arduino + PWA
 
-## 👥 Autori
+##  Autori
 Agliardi C., Bertoletti M., Travascio L., Pandini F., Donida Labati A., Bergomi F.
 
 ---
 
-## 🎯 1. Obiettivi del Progetto
+##  1. Obiettivi del Progetto
 
 L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progressive Web App (PWA), con Arduino per la parte hardware.
 
@@ -16,7 +16,7 @@ L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progre
 
 ---
 
-## 🧠 2. Architettura Generale
+##  2. Architettura Generale
 
 - **Hardware:** Macchinina fisica con motori, servocomandi e controlli via Arduino
 - **Software:** PWA che invia comandi all'Arduino tramite HTTP o WebSocket
@@ -38,7 +38,7 @@ L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progre
 
 ---
 
-## 💻 4. Componenti Software
+##  4. Componenti Software
 
 ### Lato Arduino
 - C++ con Arduino IDE
@@ -54,7 +54,7 @@ L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progre
 
 ---
 
-## ⚙️ 5. Funzionamento
+##  5. Funzionamento
 
 1. L'Arduino si connette alla rete Wi-Fi
 2. La PWA individua l'IP e si connette
@@ -63,14 +63,14 @@ L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progre
 
 ---
 
-## 🧪 6. Funzionalità
+##  6. Funzionalità
 
-- ✅ Movimento: Avanti, Indietro, Destra, Sinistra, Stop
-- ✅ UI mobile-friendly
-- ✅ LED per feedback
-- ✅ Supporto modalità offline
+-  Movimento: Avanti, Indietro, Destra, Sinistra, Stop
+-  UI mobile-friendly
+-  LED per feedback
+-  Supporto modalità offline
 
-### 🔮 Estensioni Future
+###  Estensioni Future
 
 - Streaming video (ESP32-CAM)
 - Sensori ostacolo (ultrasuoni)
@@ -78,7 +78,7 @@ L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progre
 
 ---
 
-## 🔐 7. Sicurezza & Limiti
+##  7. Sicurezza & Limiti
 
 - **Arduino:** Autenticazione con token, evitare IP pubblici non protetti
 - **Web:** Utilizzare HTTPS, rate limiting per evitare spam
@@ -88,7 +88,7 @@ L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progre
 
 ---
 
-## 🛠️ 8. Requisiti Minimi
+##  8. Requisiti Minimi
 
 - Arduino Uno + HC-05 o ESP32
 - 2 motori DC + Ponte H
@@ -98,7 +98,7 @@ L’obiettivo è costruire un veicolo controllabile da remoto tramite una Progre
 
 ---
 
-## 🧾 9. Scenario del Progetto
+##  9. Scenario del Progetto
 
 Una macchinina controllabile via smartphone, capace di:
 
@@ -109,7 +109,7 @@ Una macchinina controllabile via smartphone, capace di:
 
 ---
 
-## 📘 10. Use Case: Controllo Movimento
+##  10. Use Case: Controllo Movimento
 
 | Elemento       | Contenuto                       |
 |----------------|---------------------------------|
@@ -124,12 +124,12 @@ Una macchinina controllabile via smartphone, capace di:
 3. La macchinina si muove
 
 ### Estensioni:
-- 🔌 Connessione persa: messaggio d’errore
-- 🔋 Batteria scarica: movimento bloccato
+-  Connessione persa: messaggio d’errore
+-  Batteria scarica: movimento bloccato
 
 ---
 
-## 🎓 11. Conclusione
+##  11. Conclusione
 
 Un progetto didattico che fonde elettronica e sviluppo web. Ideale per studenti o maker, permette di imparare:
 
