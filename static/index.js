@@ -2,7 +2,7 @@ let port;
     let writer;
     const encoder = new TextEncoder();
 
-   
+    
 
     function sendCommand(char) {
       if (!writer) {
