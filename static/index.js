@@ -2,16 +2,7 @@ let port;
     let writer;
     const encoder = new TextEncoder();
 
-    async function connectSerial() {
-      try {
-        port = await navigator.serial.requestPort();
-        await port.open({ baudRate: 9600 });
-        writer = port.writable.getWriter();
-        alert("✅ Arduino connesso!");
-      } catch (err) {
-        alert("❌ Errore nella connessione: " + err);
-      }
-    }
+   
 
     function sendCommand(char) {
       if (!writer) {
