@@ -1,50 +1,67 @@
 let port;
-    let writer;
-    const encoder = new TextEncoder();
+let writer;
+const encoder = new TextEncoder();
+const activeButtons = {};
 
-    
+const keyMap = {
+  ArrowUp: { command: 'A', buttonId: 'btn-up' },
+  ArrowDown: { command: 'I', buttonId: 'btn-down' },
+  ArrowLeft: { command: 'S', buttonId: 'btn-left' },
+  ArrowRight: { command: 'D', buttonId: 'btn-right' },
+  ' ': { command: 'P', buttonId: 'btn-stop' },
+  w: { command: 'A', buttonId: 'btn-up' },
+  s: { command: 'I', buttonId: 'btn-down' },
+  a: { command: 'S', buttonId: 'btn-left' },
+  d: { command: 'D', buttonId: 'btn-right' },
+};
 
-    function sendCommand(char) {
-      if (!writer) {
-        alert("Connetti prima l'Arduino!");
-        return;
-      }
-      writer.write(encoder.encode(char));
-      console.log("Comando inviato:", char);
-    }
+function sendCommand(char) {
+  console.log("Comando inviato:", char);
 
-    function updateSpeed(val) {
-      document.getElementById("speedValue").innerText = val;
-      sendCommand(val + '\n'); // Arduino deve leggere la riga come intero
-    }
-
-    // Tasti freccia da tastiera
-    document.addEventListener('keydown', (e) => {
-      const map = {
-        ArrowUp: 'A',
-        ArrowDown: 'I',
-        ArrowLeft: 'S',
-        ArrowRight: 'D',
-        ' ': 'P',
-         w: 'A',
-        s: 'I',
-        a: 'S',
-        d: 'D',
-  
-      };
-      if (map[e.key]) sendCommand(map[e.key]);
-    });
-
-    document.addEventListener('keydown', (e) => {
-  const key = e.key.toLowerCase(); // converte in minuscolo
-  if (map[key]) sendCommand(map[key]);
+  // Invia comando al server Flask
+  fetch('/invia_comando', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ comando: char })
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('Errore dal server Flask');
+    return response.json();
+  })
+  .then(data => {
+    console.log('Risposta Flask:', data);
+  })
+  .catch(error => {
+    console.error('Errore invio al server:', error);
   });
+}
 
+function updateSpeed(val) {
+  document.getElementById("speedValue").innerText = val;
+  sendCommand(val + '\n');
+}
 
-    function inviaComando(comando) {
-      fetch("/invia_comando", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ comando: comando })
-      });
+document.addEventListener('keydown', (e) => {
+  const key = e.key.toLowerCase();
+  const mapEntry = keyMap[key];
+
+  if (mapEntry && !activeButtons[key]) {
+    sendCommand(mapEntry.command);
+    const btn = document.getElementById(mapEntry.buttonId);
+    if (btn) {
+      btn.classList.add('active');
+      activeButtons[key] = btn;
     }
+  }
+});
+
+document.addEventListener('keyup', (e) => {
+  const key = e.key.toLowerCase();
+  const btn = activeButtons[key];
+  if (btn) {
+    btn.classList.remove('active');
+    delete activeButtons[key];
+  }
+});

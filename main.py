@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import serial
 
-bluetooth = serial.Serial('COM5', 9600)
+#bluetooth = serial.Serial('COM5', 9600)
 
 app = Flask(__name__)
 
@@ -18,6 +18,6 @@ if __name__ == '__main__':
 def invia_comando():
     comando = request.json.get("comando")
     if comando:
-        bluetooth.write(comando.encode())  # Manda il comando ad Arduino
+        #bluetooth.write(comando.encode())  # Manda il comando ad Arduino
         return {"status": "ok"}
     return {"status": "errore"}, 400
