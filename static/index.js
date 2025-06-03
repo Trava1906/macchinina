@@ -8,17 +8,15 @@ const keyMap = {
   ArrowDown: { command: 'I', buttonId: 'btn-down' },
   ArrowLeft: { command: 'S', buttonId: 'btn-left' },
   ArrowRight: { command: 'D', buttonId: 'btn-right' },
-  ' ': { command: 'P', buttonId: 'btn-stop' },
-  w: { command: 'A', buttonId: 'btn-up' },
-  s: { command: 'I', buttonId: 'btn-down' },
-  a: { command: 'S', buttonId: 'btn-left' },
-  d: { command: 'D', buttonId: 'btn-right' },
+  ' ': { command: 'S', buttonId: 'btn-stop' },
+  w: { command: 'F', buttonId: 'btn-up' },
+  s: { command: 'B', buttonId: 'btn-down' },
+  a: { command: 'L', buttonId: 'btn-left' },
+  d: { command: 'R', buttonId: 'btn-right' },
 };
 
 function sendCommand(char) {
-  console.log("Comando inviato:", char);
-
-  // Invia comando al server Flask
+  console.log("Sto per inviare:", char);
   fetch('/invia_comando', {
     method: 'POST',
     headers: {
@@ -37,6 +35,7 @@ function sendCommand(char) {
     console.error('Errore invio al server:', error);
   });
 }
+
 
 function updateSpeed(val) {
   document.getElementById("speedValue").innerText = val;

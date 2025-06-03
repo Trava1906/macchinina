@@ -11,14 +11,15 @@ PORT = 1
 # Socket globale
 bt_socket = None
 
+import serial
+
 def connetti_bluetooth():
     global bt_socket
     try:
-        bt_socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-        bt_socket.connect((MAC_ADDRESS, PORT))
-        print("[INFO] Connessione Bluetooth riuscita")
-    except bluetooth.btcommon.BluetoothError as e:
-        print(f"[ERRORE] Connessione Bluetooth fallita: {e}")
+        bt_socket = serial.Serial('/dev/rfcomm0', 9600, timeout=1)
+        print("[INFO] Connessione seriale Bluetooth riuscita")
+    except serial.SerialException as e:
+        print(f"[ERRORE] Connessione seriale fallita: {e}")
         bt_socket = None
 
 # Lock per IP
@@ -51,7 +52,7 @@ def controlla_lock():
 def before_request():
     controlla_lock()
 
-@app.route("/")
+@app.route("/") 
 def home():
     return render_template("index.html")
 
@@ -62,17 +63,19 @@ def invia_comando():
         data = request.get_json(force=True)
     except Exception as e:
         return jsonify({"status": "errore", "dettaglio": f"JSON non valido: {e}"}), 400
-
-    comando = data.get("comando")
-    print("[DEBUG] Comando ricevuto:", comando)
+    try:
+        comando = data.get("comando")
+    except KeyError:
+        print("[DEBUG] Comando ricevuto:", comando)
 
     if comando and bt_socket:
         try:
-            bt_socket.send(comando.encode())
+            bt_socket.write((comando + "\n").encode())  # write invece di send
             return jsonify({"status": "ok"})
-        except bluetooth.btcommon.BluetoothError as e:
-            print(f"[ERRORE] Errore Bluetooth: {e}")
+        except serial.SerialException as e:
+            print(f"[ERRORE] Errore seriale: {e}")
             return jsonify({"status": "errore", "dettaglio": str(e)}), 500
+
 
     return jsonify({"status": "errore", "dettaglio": "Comando mancante o socket non connessa"}), 400
 
